@@ -1,0 +1,10 @@
+const config = {
+  oysterBaseURL: 'https://employers.indeed.com/api/v1',
+  oauthDiscovery: 'https://secure.indeed.com/.well-known/openid-configuration',
+  oauthClientId: '<Your OAuth Client Id>',
+  oauthClientSecret: '<Your OAuth Client Secret>',
+  oauthRedirectURL: 'http://localhost:3000/oauth-callback',
+  sessionSecret: 'Something Secret!',
+};
+
+module.exports = config;

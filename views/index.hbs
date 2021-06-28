@@ -1,0 +1,31 @@
+
+<h1>Your Jobs</h1>
+
+{{#unless jobs}}
+  <div class="alert alert-primary mt-3" role="alert">
+  <p>
+      You don't have any jobs.
+  </p>
+  </div>
+{{else}}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">City</th>
+      <th scope="col">Country</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each jobs}}
+    <tr>
+      <th scope="row">{{this.title}}</th>
+      <td>{{this.city}}</td>
+      <td>{{this.country}}</td>
+      <td><a href="/campaign/create/{{this.id}}" class="btn btn-primary btn-sm" role="button">Sponsor with Indeed</a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{/unless}}

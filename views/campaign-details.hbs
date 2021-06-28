@@ -1,0 +1,71 @@
+<h1>Campaign Details</h1>
+
+<table class="table">
+<tr>
+  <th>Campaign Name</th>
+  <td>{{campaignDetails.Name}}</td>
+</tr>
+<tr>
+  <th>Status</th>
+  <td>{{campaignDetails.Status}}</td>
+</tr>
+<tr>
+  <th>Type</th>
+  <td>{{campaignDetails.Type}}</td>
+</tr>
+{{#if campaignDetails.budgetMonthlyLimit}}
+<tr>
+  <th>Budget Monthly Limit</th>
+  <td>{{formatCurrency campaignDetails.CurrencyCode campaignDetails.budgetMonthlyLimit}}</td>
+</tr>
+<tr>
+  <th>Daily Budget</th>
+  <td>{{formatCurrency campaignDetails.CurrencyCode campaignDetails.DailyBudget}}</td>
+</tr>
+{{/if}}
+{{#if campaignDetails.budgetOnetimeLimit}}
+<tr>
+  <th>Budget One Time Limit</th>
+  <td>{{formatCurrency campaignDetails.CurrencyCode campaignDetails.budgetOnetimeLimit}}</td>
+</tr>
+<tr>
+  <th>Start Date</th>
+  <td>{{campaignDetails.startDate}}</td>
+</tr>
+<tr>
+  <th>Target End Date</th>
+  <td>{{campaignDetails.targetEndDate}}</td>
+</tr>
+{{/if}}
+<tr>
+  <th>Date Created</th>
+  <td>{{campaignDetails.dateCreated}}</td>
+</tr>
+<tr>
+  <th>First Spend Date</th>
+  <td>{{campaignDetails.firstSpendDate}}</td>
+</tr>
+<tr>
+  <th>Last Spend Date</th>
+  <td>{{campaignDetails.lastSpendDate}}</td>
+</tr>
+</table>
+
+
+<form method="POST" action="/campaign/campaign-details/{{campaignDetails.Id}}">
+  <div class="row mb-3">
+    <div class="col">
+      {{#matches campaignDetails.Status 'DELETED'}}
+        {{! If DELETED then don't show any campaign actions}}
+      {{else}}
+        <button name="campaignAction" type="submit" class="btn btn-danger" value="DELETED">Delete Campaign</button>
+        {{#matches ../campaignDetails.Status 'ACTIVE'}}
+          <button name="campaignAction"  type="submit" class="btn btn-secondary" value="PAUSED">Pause Campaign</button>
+        {{/matches}}
+        {{#matches ../campaignDetails.Status 'PAUSED'}}
+          <button name="campaignAction"  type="submit" class="btn btn-secondary" value="ACTIVE">Unpause Campaign</button>
+        {{/matches}}
+      {{/matches}}
+    </div>
+  </div>
+</form>

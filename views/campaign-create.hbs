@@ -1,0 +1,96 @@
+
+<h1>Sponsor with Indeed</h1>
+
+<p>
+  Sponsor the <b>{{job.title}}</b> job with Indeed by completing the following form.
+</p>
+
+<form method="post" action="/campaign/create/{{job.id}}">
+
+  <div class="row g-3">
+    <div class="col">
+      <p>
+        Select how you want to spend your advertising budget.
+      </p>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" name="selectBudgetType" type="radio" id="monthlyRadio" value="monthly" checked />
+        <label class="form-check-label" for="monthlyRadio">Monthly Budget Limit</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" name="selectBudgetType" type="radio" id="oneTimeRadio" value="oneTime">
+        <label class="form-check-label" for="oneTimeRadio">One Time Budget Limit</label>
+      </div>
+    </div>
+  </div>
+
+  <fieldset id="monthly" class="mt-2">
+    <legend>Monthly Budget Limit</legend>
+
+    <div class="row mb-3">
+      <div class="col">
+        <label for="budgetMonthlyLimit" class="form-label">Budget</label>
+        <div class="input-group mb-3">
+          <span class="input-group-text">$</span>
+          <input name="budgetMonthlyLimit" id="budgetMonthlyLimit" type="number" min="50" step="any"
+            class="form-control" placeholder="Budget" value="{{newCampaign.budgetMonthlyLimit}}" />
+        </div>
+      </div>
+    </div>
+
+  </fieldset>
+
+  <fieldset id="oneTime" style="display:none" class="mt-2">
+    <legend>One Time Budget Limit</legend>
+
+    <div class="row mb-3">
+      <div class="col form-group">
+        <label for="budgetOneTimeLimit" class="form-label">Budget</label>
+        <div class="input-group mb-3">
+          <span class="input-group-text">$</span>
+          <input name="budgetOneTimeLimit" id="budgetOneTimeLimit" type="number" min="50" step="any"
+            class="form-control" value="{{newCampaign.budgetOneTimeLimit}}" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <label for="startDate" class="form-label">Start Date</label>
+        <input name="startDate" id="startDate" type="date" class="form-control" 
+          placeholder="Start Date" value="{{newCampaign.startDate}}" />
+      </div>
+      <div class="col">
+        <label for="targetEndDate" class="form-label">Target End Date</label>
+        <input name="targetEndDate" id="targetEndDate" type="date" class="form-control" 
+          placeholder="Target End Date" value="{{newCampaign.targetEndDate}}" />
+      </div>
+    </div>
+
+  </fieldset>
+
+  <div class="row mb-3">
+    <div class="col">
+      <a class="btn btn-secondary mr-2" href="/">Cancel</a>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+
+</form>
+
+
+<script>
+  const monthly = document.getElementById('monthly');
+  const oneTime = document.getElementById('oneTime');
+
+  document.getElementById('oneTimeRadio').addEventListener('click', (e) => {
+    monthly.style.display = 'none';
+    oneTime.style.display = 'block';
+  });
+
+  document.getElementById('monthlyRadio').addEventListener('click', (e) => {
+    monthly.style.display = 'block';
+    oneTime.style.display = 'none';
+  });
+
+</script>

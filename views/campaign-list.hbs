@@ -1,0 +1,30 @@
+<h1>Your Indeed Sponsored Job Campaigns</h1>
+
+{{#unless campaigns}}
+  <div class="alert alert-primary mt-3" role="alert">
+  <p>
+      You don't have any sponsored job campaigns.
+  </p>
+  </div>
+{{else}}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Action</th>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each campaigns}}
+    <tr>
+      <td><a href="/campaign/campaign-details/{{this.Id}}" class="btn btn-secondary btn-sm" href="#" role="button">View</a></td>
+      <th scope="row">{{this.Id}}</th>
+      <td>{{this.Name}}</td>
+      <td>{{this.Status}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{/unless}}
