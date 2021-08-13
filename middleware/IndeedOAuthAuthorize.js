@@ -7,7 +7,7 @@ async function IndeedOAuthAuthorize(req, res, next) {
 
   if (!tokenSet) {
     req.session.returnUrl = req.originalUrl;
-    const authorizeURL = await indeedOAuth.getAuthorizeURL('employer_access offline_access');
+    const authorizeURL = await indeedOAuth.getAuthorizeURL('employer_access offline_access employer.advertising.account.read employer.advertising.campaign.read');
     res.redirect(authorizeURL);
   } else {
     res.locals.tokenSet = tokenSet;

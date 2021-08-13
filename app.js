@@ -51,8 +51,8 @@ app.use('/campaign', campaignRouter);
 app.use('/job-feed', jobFeedRouter);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
-  next(createError(404));
+app.use((req) => {
+  console.error(`NOT FOUND: ${req.url}`);
 });
 
 // error handler

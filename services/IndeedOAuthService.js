@@ -19,7 +19,10 @@ class IndeedOAuthService {
     // if token set expired or new employer then use Refresh Token
     if (tokenSet.expired()) {
       const client = await this.getOAuthClient();
-      tokenSet = await client.refresh(tokenSet);
+      tokenSet = await client.refresh(
+        tokenSet,
+        { employer: this.session.employer },
+      );
       this.session.tokenSet = tokenSet;
     }
     return tokenSet;
@@ -48,6 +51,7 @@ class IndeedOAuthService {
       scope,
       code_challenge: codeChallenge,
       code_challenge_method: 'S256',
+      prompt: 'select_employer',
     });
   }
 
@@ -57,6 +61,9 @@ class IndeedOAuthService {
     // get OAuth callback parameters including Auth Code, Scope
     const params = client.callbackParams(req);
 
+    // get employer
+    const { employer } = req.query;
+
     // get code verifier from session state
     const codeVerifier = this.session.oauthCodeVerifier;
 
@@ -65,10 +72,14 @@ class IndeedOAuthService {
       this.config.oauthRedirectURL,
       params,
       { code_verifier: codeVerifier },
+      {
+        exchangeBody: { employer },
+      },
     );
 
     // store token set (Access Token, Refresh Token, ID Token)
     // in session state
+    this.session.employer = employer;
     this.session.tokenSet = tokenSet;
     this.session.claims = tokenSet.claims();
   }

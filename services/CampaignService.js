@@ -8,6 +8,9 @@ class CampaignService {
   }
 
   async requestResource(url, method = 'GET', data) {
+
+    console.dir(this.tokenSet.access_token, {depth:null});
+
     console.info(`Axios ${method}: ${url}`);
     try {
       const results = await axios({
