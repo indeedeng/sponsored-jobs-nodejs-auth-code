@@ -38,7 +38,7 @@ class IndeedOAuthService {
     });
   }
 
-  async getAuthorizeURL(scope) {
+  async getAuthorizeURL() {
     // create code challenge (for PKCE)
     const codeVerifier = generators.codeVerifier();
     const codeChallenge = generators.codeChallenge(codeVerifier);
@@ -48,7 +48,7 @@ class IndeedOAuthService {
 
     const client = await this.getOAuthClient();
     return client.authorizationUrl({
-      scope,
+      scope: this.config.scope,
       code_challenge: codeChallenge,
       code_challenge_method: 'S256',
       prompt: 'select_employer',

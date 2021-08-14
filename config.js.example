@@ -4,6 +4,7 @@ const config = {
   oauthClientId: '<Your OAuth Client Id>',
   oauthClientSecret: '<Your OAuth Client Secret>',
   oauthRedirectURL: 'http://localhost:3000/oauth-callback',
+  scope: 'employer_access offline_access employer.advertising.account.read employer.advertising.campaign.read employer.advertising.campaign',
   sessionSecret: 'Something Secret!',
 };
 

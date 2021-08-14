@@ -26,7 +26,7 @@ function getFutureDate(monthsInFuture) {
 
 router.get('/no-job-source', async (req, res) => {
   const indeedOAuth = new IndeedOAuthService(config, req.session);
-  const authorizeURL = await indeedOAuth.getAuthorizeURL('employer_access offline_access employer.advertising.account.read employer.advertising.campaign.read');
+  const authorizeURL = await indeedOAuth.getAuthorizeURL();
 
   res.render('no-job-source', {
     authorizeURL,

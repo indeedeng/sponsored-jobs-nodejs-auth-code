@@ -8,9 +8,6 @@ class CampaignService {
   }
 
   async requestResource(url, method = 'GET', data) {
-
-    console.dir(this.tokenSet.access_token, {depth:null});
-
     console.info(`Axios ${method}: ${url}`);
     try {
       const results = await axios({
@@ -76,7 +73,6 @@ class CampaignService {
       jobsSourceName: account.jobSourceList[0].siteName,
       jobsToInclude: 'query',
       jobsQuery: `refnum:${job.id}`,
-      budgetOptimizationTarget: 'AUTOMATIC',
     };
 
     if (newCampaign.budgetType === 'monthly') {
