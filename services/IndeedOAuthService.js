@@ -68,7 +68,7 @@ class IndeedOAuthService {
     const codeVerifier = this.session.oauthCodeVerifier;
 
     // validate
-    const tokenSet = await client.oauthCallback(
+    const tokenSet = await client.callback(
       this.config.oauthRedirectURL,
       params,
       { code_verifier: codeVerifier },
